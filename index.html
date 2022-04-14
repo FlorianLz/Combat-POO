@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./css/style.css">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <title>Jeu de combat</title>
+</head>
+<body class="bg-gray-300">
+    <div class="container mx-auto px-5">
+        <h1 class="text-4xl font-bold py-3 text-center">Bienvenue sur le jeu de combat</h1>
+        <div id="choixPerso" class="m-4">
+            <h2 class="text-xl m-5">Choix du personnage :</h2>
+            <div class="flex">
+                <div class="mb-3 h-40 w-40 rounded-full border-2 border-gray-600 flex items-center mx-auto selectPerso" data-personnage="Magicien">
+                    <img class="border-gray-600 h-40 w-40 rounded-full selectPerso hover:cursor-pointer" data-personnage="Magicien" alt="" src="https://i.pravatar.cc/150?img=66" />
+                </div>
+                <div class="mb-3 h-40 w-40 rounded-full border-2 border-gray-600 flex items-center mx-auto selectPerso" data-personnage="Guerrier">
+                    <img class="border-gray-600 h-40 w-40 rounded-full selectPerso hover:cursor-pointer" data-personnage="Guerrier" alt="" src="./img/Guerrier.gif" />
+                </div>
+            </div>
+        </div>
+        <div id="infosGame">
+            <h2 class="text-2xl">Partie en cours :</h2>
+            <div id="container" class="w-full mx-auto">
+                <div class="flex flex-col sm:flex-row">
+                    <div class="sm:w-3/6 p-2 h-100">
+                        <div class="bg-white px-6 py-8 rounded-lg shadow-lg text-center h-full flex flex-col justify-center cardHero">
+                            <div class="mb-3 h-40 w-40 rounded-full border-2 border-gray-600 flex items-center mx-auto">
+                                <img
+                                        class="border-gray-600 h-40 w-40 rounded-full"
+                                        alt=""
+                                        id="imgJoueur1"
+                                />
+                            </div>
+                            <h2 class="text-xl font-medium text-gray-700"><span id="joueur1" class="bold"></span></h2>
+                            <span class="text-blue-500 block mb-1"><span id="PV1"></span> PV</span>
+                            <span class="text-blue-500 block mb-1">Niveau <span id="level"></span> : <span id="experience"></span> XP</span>
+                            <span class="text-blue-500 block mb-1 mana">Mana : <span id="mana"></span></span>
+                            <span class="text-blue-500 block mb-1 mana">Argent : <span id="argent"></span>$</span>
+
+                            <div class="actions mt-5 flex-col flex"><button class="btnAction px-4 py-2 bg-blue-500 text-white rounded-full mb-2" data-action="T">Attaque <span id="attaque" data-action="T"></span></button>
+                            <button class="btnAction attaqueSpeciale px-4 py-2 bg-blue-500 text-white rounded-full mb-2" data-action="B">Attaque spéciale <span id="speciale" data-action="B"></span></button>
+                            <button id="competence" class="btnAction competence px-4 py-2 bg-blue-500 text-white rounded-full mb-2 hidden" data-action="C">Compétence</button>
+                            <button id="achatPotion" class="btnAction px-4 py-2 bg-blue-500 text-white rounded-full mb-2 hidden" data-action="AP">Acheter une potion</button>
+                            <button id="usePotion" class="btnAction px-4 py-2 bg-blue-500 text-white rounded-full mb-2" data-action="S">Se soigner</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="sm:w-3/6 p-2 h-100">
+                        <div class="bg-white px-6 py-8 rounded-lg shadow-lg text-center h-full flex flex-col justify-center cardMonstre">
+                            <div class="mb-3 h-40 w-40 rounded-full border-2 border-gray-600 flex items-center mx-auto">
+                                <img
+                                        id="imgJoueur2"
+                                        class="h-28 w-28 transform mx-auto object-cover"
+                                        alt=""
+                                />
+                            </div>
+                            <h2 class="text-xl font-medium text-gray-700"><span id="joueur2"></span></h2>
+                            <span class="text-blue-500 block mb-5"><span id="PV2"></span> PV</span>
+                        </div>
+                    </div>
+
+                    <div class="flex w-1/6 mx-auto flex-col justify-center">
+                        <div class="px-4 py-4 mt-4 bg-white border border-gray-300 rounded w-full mx-auto">
+                            <p class="text-3xl font-semibold text-center text-gray-800"><span class="bold" id="nbTues"></span></p>
+                            <p class="text-lg text-center text-gray-500">monstres tués</p>
+                        </div>
+                        <div class="px-4 py-4 mt-4 bg-white border border-gray-300 rounded w-full mx-auto">
+                            <p class="text-3xl font-semibold text-center text-gray-800"><span class="bold" id="nbTours"></span></p>
+                            <p class="text-lg text-center text-gray-500">tours joués</p>
+                        </div>
+                    </div>
+                </div>
+
+
+            </div>
+            </div>
+        </div>
+        <div id="gameOver" class="w-4/5 m-auto hidden">
+            <div class="bg-white px-6 py-8 rounded-lg shadow-lg text-center h-full flex flex-col justify-center cardMonstre">
+                <h2 class="text-xl font-medium text-gray-700 pb-3">Game Over</h2>
+                <span class="text-blue-500 block mb-1">Vous avez joué <span id="nbToursGameOver"></span> tours</span>
+                <span class="text-blue-500 block mb-1">Vous avez atteint le niveau <span id="levelGameOver"></span></span>
+                <span class="text-blue-500 block mb-4">Vous avez tué <span id="nbTuesGameOver"></span> monstres :</span>
+                <table>
+                    <thead>
+                    <tr>
+                        <th>Nom</th>
+                        <th>Nombre</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>
+                                Carapuce
+                            </td>
+                            <td>
+                                <span id="nbCarapuce"></span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                Salamèche
+                            </td>
+                            <td>
+                                <span id="nbSalameche"></span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                Bulbizarre
+                            </td>
+                            <td>
+                                <span id="nbBulbizarre"></span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                Pikachu
+                            </td>
+                            <td>
+                                <span id="nbPikachu"></span>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+
+    <script src="./js/script.js"></script>
+</body>
+</html>

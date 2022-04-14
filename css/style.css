@@ -1,0 +1,43 @@
+/*@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap');
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Roboto', sans-serif;
+}
+.container{
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 2rem;
+}
+h1{
+    font-size: 2.5rem;
+    font-weight: 700;
+    margin-bottom: 2rem;
+}
+p{
+    font-size: 1.6rem;
+}
+button{
+    padding: 1rem 2rem;
+    border: none;
+    border-radius: .5rem;
+    background: #00a8ff;
+    color: #fff;
+    cursor: pointer;
+}
+*/
+#infosGame{
+    display: none;
+}
+.infligeDegats{
+    animation: degats 0.7s ease-in-out forwards;
+}
+@keyframes degats{
+    0%{
+        background-color: white;
+    }
+    50%{
+        background-color: lightcoral;
+    }
+}
